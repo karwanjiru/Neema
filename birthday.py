@@ -1,32 +1,50 @@
 import streamlit as st
+import datetime
 
-# Set page config
-st.set_page_config(page_title="Happy Birthday!", page_icon="🎂", layout="centered")
+# Set page configuration
+st.set_page_config(
+    page_title="Happy Birthday, Neema!",
+    page_icon="🎉",
+    layout="centered"
+)
 
-# Main heading
-st.title("🎉 Happy Birthday! 🎈")
+# Apply custom CSS for background color and font
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #FFFAF0;
+        color: #8B0000;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .main .block-container {
+        padding-top: 2rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Main heading with emoji
+st.markdown("<h1 style='text-align: center;'>🎂 Happy Birthday, Neema! 🎂</h1>", unsafe_allow_html=True)
 
 # Birthday message
-st.write(
+st.markdown(
     """
-    **Wishing you a fantastic day filled with joy, laughter, and love!** 🎂🎁🎊
-    May this year bring you all the success and happiness you deserve.
-    """
+    <div style='text-align: center;'>
+        <p><strong>Wishing you a day filled with happiness and a year filled with joy, Neema!</strong></p>
+        <p>May your special day be as amazing as you are. 🎈🎁</p>
+    </div>
+    """,
+    unsafe_allow_html=True
 )
 
-# Display a birthday image
-st.image(
-    "https://images.unsplash.com/photo-1515543237356-5f0d2740b117", 
-    caption="Enjoy your special day!", use_column_width=True
-)
-
-# Play a birthday song
-st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", format='audio/mp3')
+# Display current date
+current_date = datetime.datetime.now().strftime("%A, %B %d, %Y")
+st.markdown(f"<div style='text-align: center;'>Today's Date: {current_date}</div>", unsafe_allow_html=True)
 
 # Confetti animation
 st.balloons()
 
-# Personalized birthday wishes
-name = st.text_input("Enter your name to send wishes:")
-if name:
-    st.success(f"🎉 {name} sends you warm birthday wishes! 🎈")
+# Special wish section
+st.success("🎉 Happy Birthday, Neema! You are truly special and loved. Wishing you all the best! 🎈")
