@@ -9,7 +9,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Apply custom CSS for background color, font, and animation
+# Custom CSS for envelope animation and hidden message
 st.markdown(
     """
     <style>
@@ -17,100 +17,68 @@ st.markdown(
         background-color: #FFFAF0;
         color: #8B0000;
         font-family: 'Comic Sans MS', cursive, sans-serif;
+        text-align: center;
     }
-    .main .block-container {
-        padding-top: 2rem;
+    .envelope-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
     }
     .envelope {
-        position: relative;
-        width: 150px;
-        height: 100px;
+        width: 200px;
+        height: 150px;
         background: #E74C3C;
-        margin: auto;
-        border-radius: 10px 10px 0 0;
+        position: relative;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .flap {
         position: absolute;
         top: 0;
         left: 0;
-        width: 150px;
+        width: 200px;
         height: 100px;
         background: #C0392B;
         border-radius: 10px 10px 0 0;
-        transform-origin: top;
-        animation: openFlap 2s forwards;
-    }
-    @keyframes openFlap {
-        0% { transform: rotateX(0deg); }
-        100% { transform: rotateX(180deg); }
+        transition: transform 1s ease-in-out;
     }
     .message {
-        position: relative;
-        width: 120px;
-        height: 80px;
-        background: white;
-        margin: auto;
-        top: -60px;
-        border-radius: 5px;
-        padding: 10px;
-        text-align: center;
-        font-size: 16px;
+        display: none;
+        font-size: 18px;
         font-weight: bold;
         color: #E74C3C;
-        opacity: 0;
-        animation: showMessage 3s forwards;
-    }
-    @keyframes showMessage {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-    }
-    .hearts {
-        position: absolute;
-        width: 100%;
-        height: 100px;
-        overflow: hidden;
-    }
-    .heart {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background: red;
-        transform: rotate(-45deg);
-        animation: floatHearts 5s infinite ease-in-out;
-    }
-    .heart:before,
-    .heart:after {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background: red;
-        border-radius: 50%;
-    }
-    .heart:before { top: -10px; left: 0; }
-    .heart:after { left: 10px; top: 0; }
-    @keyframes floatHearts {
-        0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
-        100% { transform: translateY(-100px) rotate(-45deg); opacity: 0; }
+        margin-top: 20px;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Main heading with emoji
-st.markdown("<h1 style='text-align: center;'>🎂 Happy Birthday, Neema! 🎂</h1>", unsafe_allow_html=True)
+# Main heading
+st.markdown("<h1>🎂 Happy Birthday, Neema! 🎂</h1>", unsafe_allow_html=True)
 
-# Animated envelope with a message inside
+# Envelope section
 st.markdown(
     """
-    <div class='envelope'>
-        <div class='flap'></div>
+    <div class='envelope-container' onclick='openEnvelope()'>
+        <div class='envelope'>
+            <div class='flap' id='flap'></div>
+            <p style='color: white; font-weight: bold;'>Tap to Open</p>
+        </div>
     </div>
-    <div class='message'>
-        🎉 Happy Birthday, Neema! 🎉<br>
-        Wishing you joy, love, and endless happiness! 💖
-    </div>
+    <div class='message' id='message'>🎉 Happy Birthday, Neema! 🎉<br> Wishing you joy, love, and endless happiness! 💖</div>
+    <script>
+    function openEnvelope() {
+        document.getElementById('flap').style.transform = 'rotateX(180deg)';
+        setTimeout(() => {
+            document.getElementById('message').style.display = 'block';
+        }, 1000);
+    }
+    </script>
     """,
     unsafe_allow_html=True
 )
@@ -121,20 +89,6 @@ st.markdown(f"<div style='text-align: center;'>Today's Date: {current_date}</div
 
 # Confetti animation
 st.balloons()
-
-# Floating hearts effect
-st.markdown(
-    """
-    <div class='hearts'>
-        <div class='heart' style='left: 10%; animation-delay: 0s;'></div>
-        <div class='heart' style='left: 30%; animation-delay: 1s;'></div>
-        <div class='heart' style='left: 50%; animation-delay: 2s;'></div>
-        <div class='heart' style='left: 70%; animation-delay: 3s;'></div>
-        <div class='heart' style='left: 90%; animation-delay: 4s;'></div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 
 # Special wish section
 st.success("🎉 Happy Birthday, Neema! You are truly special and loved. Wishing you all the best! 🎈")
