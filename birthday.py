@@ -72,7 +72,6 @@ st.markdown(f"<div style='text-align: center; margin-top: 20px;'>Today's Date: {
 
 # Confetti animation
 st.balloons()
-st.kisses()
 
 # Special wish section
 st.success("🎉 Happy Birthday, Neema! You are truly special and loved. Our way of showing our love for you in our own big and small ways. Kisses 🎈")
